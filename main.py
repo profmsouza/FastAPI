@@ -78,3 +78,4 @@ async def create_sticker(url: str, brand: str, model: str, year:str, adj: str, c
 
     # Retornando o link direto para a imagem
     return {"link": up_img.link}
+  
