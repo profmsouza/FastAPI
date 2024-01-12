@@ -39,7 +39,7 @@ async def create_sticker(url: str, brand: str, model: str, year:str, adj: str, c
     draw.text((150+h, 1570+v+5*s), end4, font=load_font(50), fill=(0,0,0))
     image = image.rotate(-90, expand=True)
     draw = ImageDraw.Draw(image)
-    draw.text((800, 1220), adj, font=font110, fill=(255,255,0))
+    draw.text((800, 1220), adj, font=load_font(110), fill=(255,255,0))
     image = image.rotate(90, expand=True)
     image.save("is.png")
     client_id = os.environ.get('CLIENT_ID')
