@@ -1,3 +1,5 @@
+from PIL import ImageFont
+
 def make_q(u):
       return 'https://quickchart.io/qr?text='+u+'&light=ffffff00&&dark=ffff00'
 
