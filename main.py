@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 import hypercorn
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 import pyimgur
 import requests
 import io
