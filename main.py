@@ -4,6 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 import pyimgur
 import requests
 import io
+import os
 
 app = FastAPI()
 
