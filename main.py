@@ -5,6 +5,7 @@ import pyimgur
 import requests
 import io
 import os
+from add import make_q, load_font
 
 app = FastAPI()
 
@@ -13,8 +14,9 @@ async def hello():
   return {"Welcome": "It is online!"}
 
 @app.get("/sticker")
-async def create_sticker(url: str, q: str, brand: str, model: str, year:str, adj: str, code: str, nome: str, end1: str, end2: str, end3: str, end4: str):
+async def create_sticker(url: str, brand: str, model: str, year:str, adj: str, code: str, nome: str, end1: str, end2: str, end3: str, end4: str):
     image = Image.open("i.png")
+    q = make_q(url)
     response = requests.get(q)
     qr = Image.open(io.BytesIO(response.content))
     width, height = qr.size
@@ -24,8 +26,8 @@ async def create_sticker(url: str, q: str, brand: str, model: str, year:str, adj
     image.paste(qr, (47,260))
     draw = ImageDraw.Draw(image)
     h,v,s=[10,15,40]
-    def load_font(s):
-      return ImageFont.truetype("f.ttf", s)
+    #def load_font(s):
+    #  return ImageFont.truetype("f.ttf", s)
     draw.text((35, 10), brand, font=load_font(100), fill=(255,255,0))
     draw.text((35, 100), model, font=load_font(60), fill=(255,255,0))
     draw.text((260, 150), str(int(year)), font=load_font(80), fill=(255,255,0))
@@ -48,4 +50,4 @@ async def create_sticker(url: str, q: str, brand: str, model: str, year:str, adj
     up_img = im.upload_image(filename, title="ys")
     return {"link": up_img.link}
   
-#http://127.0.0.1:8000/sticker?url=https://tinyurl.com/29564pct&q=https://quickchart.io/qr?text=https://tinyurl.com/29564pc&light=ffffff00&dark=ffff00&brand=RENAULT&model=DUSTER&year=2021&adj=MARAVIHOSO&code=H1992023175615H&nome=MÁRCIO LUÍS MOREIRA DE SOUZA&end1=Rua L, 486 - Casa&end2=Parque Olímpico&end3=Governador Valadares&end4=CEP 35065-242
+#http://127.0.0.1:8000/sticker?url=https://tinyurl.com/29564pct&dark=ffff00&brand=RENAULT&model=DUSTER&year=2021&adj=MARAVIHOSO&code=H1992023175615H&nome=MÁRCIO LUÍS MOREIRA DE SOUZA&end1=Rua L, 486 - Casa&end2=Parque Olímpico&end3=Governador Valadares&end4=CEP 35065-242
