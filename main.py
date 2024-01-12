@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-import uvicorn
+import hypercorn
 from PIL import Image, ImageDraw, ImageFont
 import pyimgur
 import requests
