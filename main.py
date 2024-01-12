@@ -76,8 +76,7 @@ async def create_sticker(url: str, brand: str, model: str, year:str, adj: str, c
     image.save("iSellCode.png")
 
     # Upload
-    client_id = os.getenv("CLIENT_ID")
-    im = pyimgur.Imgur(client_id)
+    im = pyimgur.Imgur("cf3f05cef69c138")
     filename = 'iSellCode.png'
     up_img = im.upload_image(filename, title="Seu adesivo")
 
