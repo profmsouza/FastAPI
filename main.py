@@ -11,7 +11,7 @@ app = FastAPI()
 
 @app.get("/")
 async def hello():
-  return {"Welcome": "iSell API is online"}
+  return {"Welcome": "It is online!"}
 
 @app.get("/sticker")
 async def create_sticker(url: str, brand: str, model: str, year:str, adj: str, code: str, nome: str, end1: str, end2: str, end3: str, end4: str):
