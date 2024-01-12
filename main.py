@@ -15,14 +15,7 @@ async def hello():
 
 @app.get("/sticker")
 async def create_sticker(url: str, brand: str, model: str, year:str, adj: str, code: str, nome: str, end1: str, end2: str, end3: str, end4: str):
-    # Imagem base
-    image_url = "https://i.imgur.com/uSVWp74.png"
-
-    # Baixar a imagem
-    response = requests.get(image_url)
-    image_data = io.BytesIO(response.content)
-
-    image = Image.open(image_data)
+    image = Image.open("i.png")
 
     # QRCODE
     qr_link="https://quickchart.io/qr?text=" + url + "&light=ffffff00&dark=ffff00"
