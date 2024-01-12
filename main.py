@@ -26,8 +26,6 @@ async def create_sticker(url: str, brand: str, model: str, year:str, adj: str, c
     image.paste(qr, (47,260))
     draw = ImageDraw.Draw(image)
     h,v,s=[10,15,40]
-    #def load_font(s):
-    #  return ImageFont.truetype("f.ttf", s)
     draw.text((35, 10), brand, font=load_font(100), fill=(255,255,0))
     draw.text((35, 100), model, font=load_font(60), fill=(255,255,0))
     draw.text((260, 150), str(int(year)), font=load_font(80), fill=(255,255,0))
