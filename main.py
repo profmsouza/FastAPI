@@ -31,33 +31,21 @@ async def create_sticker(url: str, brand: str, model: str, year:str, adj: str, c
     # Composição
     image.paste(qr, (47,260))
     draw = ImageDraw.Draw(image)
-    font200 = ImageFont.truetype("BebasNeue-Regular.ttf", 200)
-    font180 = ImageFont.truetype("BebasNeue-Regular.ttf", 180)
-    font140 = ImageFont.truetype("BebasNeue-Regular.ttf", 140)
-    font120 = ImageFont.truetype("BebasNeue-Regular.ttf", 120)
-    font110 = ImageFont.truetype("BebasNeue-Regular.ttf", 110)
-    font100 = ImageFont.truetype("BebasNeue-Regular.ttf", 100)
-    font80 = ImageFont.truetype("BebasNeue-Regular.ttf", 80)
-    font60 = ImageFont.truetype("BebasNeue-Regular.ttf", 60)
-    font50 = ImageFont.truetype("BebasNeue-Regular.ttf", 50)
-    font40 = ImageFont.truetype("BebasNeue-Regular.ttf", 40)
-    font30 = ImageFont.truetype("BebasNeue-Regular.ttf", 30)
-    font20 = ImageFont.truetype("BebasNeue-Regular.ttf", 20)
-    draw.text((35, 10), brand, font=font100, fill=cor)
-    draw.text((35, 100), model, font=font60, fill=cor)
-    draw.text((260, 150), year, font=font80, fill=cor)
-    draw.text((240, 1295), url, font=font80, fill=cor)
-    draw.text((1180, 1380), code, font=font30, fill=(72,72,72))
-    draw.text((1145, 1530), code, font=font30, fill=(72,72,72))
-
-    h=10
-    v=15
-    s=40
-    draw.text((150+h, 1570+v+0*s), nome, font=font60, fill=(0,0,0))
-    draw.text((150+h, 1570+v+2*s), end1, font=font50, fill=(0,0,0))
-    draw.text((150+h, 1570+v+3*s), end2, font=font50, fill=(0,0,0))
-    draw.text((150+h, 1570+v+4*s), end3, font=font50, fill=(0,0,0))
-    draw.text((150+h, 1570+v+5*s), end4, font=font50, fill=(0,0,0))
+    def load_font(s):
+      return ImageFont.truetype("f.ttf", s)
+    
+    h,v,s=[10,15,40]
+    draw.text((35, 10), brand, font=load_font(100), fill=cor)
+    draw.text((35, 100), model, font=load_font(60), fill=cor)
+    draw.text((260, 150), year, font=load_font(80), fill=cor)
+    draw.text((240, 1295), url, font=load_font(80), fill=cor)
+    draw.text((1180, 1380), code, font=load_font(30), fill=(72,72,72))
+    draw.text((1145, 1530), code, font=load_font(30), fill=(72,72,72))
+    draw.text((150+h, 1570+v+0*s), nome, font=load_font(60), fill=(0,0,0))
+    draw.text((150+h, 1570+v+2*s), end1, font=load_font(50), fill=(0,0,0))
+    draw.text((150+h, 1570+v+3*s), end2, font=load_font(50), fill=(0,0,0))
+    draw.text((150+h, 1570+v+4*s), end3, font=load_font(50), fill=(0,0,0))
+    draw.text((150+h, 1570+v+5*s), end4, font=load_font(50), fill=(0,0,0))
 
     image = image.rotate(-90, expand=True)
     draw = ImageDraw.Draw(image)
@@ -66,12 +54,9 @@ async def create_sticker(url: str, brand: str, model: str, year:str, adj: str, c
 
 
     # Salvando composição
-    image.save("iSellCode.png")
-
-    # Upload
+    image.save("is.png")
     im = pyimgur.Imgur("cf3f05cef69c138")
-    filename = 'iSellCode.png'
-    up_img = im.upload_image(filename, title="Seu adesivo")
+    up_img = im.upload_image("is.png", title="ys")
 
     # Retornando o link direto para a imagem
     return {"link": up_img.link}
