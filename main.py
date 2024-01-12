@@ -48,4 +48,4 @@ async def create_sticker(url: str, brand: str, model: str, year:str, adj: str, c
     up_img = im.upload_image(filename, title="ys")
     return {"link": up_img.link}
   
-#http://127.0.0.1:8000/sticker?url=https://tinyurl.com/29564pct&dark=ffff00&brand=RENAULT&model=DUSTER&year=2021&adj=MARAVIHOSO&code=H1992023175615H&nome=MÁRCIO LUÍS MOREIRA DE SOUZA&end1=Rua L, 486 - Casa&end2=Parque Olímpico&end3=Governador Valadares&end4=CEP 35065-242
+#http://127.0.0.1:8000/sticker?url=https://tinyurl.com/29564pct&brand=MARCA&model=MODELO&year=2021&adj=ESSE CARRO LEGAL&code=H1992023175615H&nome=UM DOIS TRÊS DA SILVA QUATRO&end1=Rua A, 486 - Casa&end2=BAIRRO LEGAL&end3=Governador Valadares&end4=CEP 35065-000
