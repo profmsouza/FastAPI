@@ -47,5 +47,3 @@ async def create_sticker(url: str, brand: str, model: str, year:str, adj: str, c
     filename = 'is.png'
     up_img = im.upload_image(filename, title="ys")
     return {"link": up_img.link}
-  
-#http://127.0.0.1:8000/sticker?url=https://tinyurl.com/29564pct&brand=MARCA&model=MODELO&year=2021&adj=ESSE CARRO LEGAL&code=H1992023175615H&nome=UM DOIS TRÊS DA SILVA QUATRO&end1=Rua A, 486 - Casa&end2=BAIRRO LEGAL&end3=Governador Valadares&end4=CEP 35065-000
