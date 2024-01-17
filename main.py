@@ -6,6 +6,7 @@ import requests
 import io
 import os
 from add import make_q, load_font
+import math
 
 app = FastAPI()
 
@@ -39,7 +40,8 @@ async def create_sticker(u: str, b: str, m: str, y:str, a: str, c: str, n: str, 
     draw.text((150+h, 1570+v+5*s), e4, font=load_font(50), fill=(0,0,0))
     image = image.rotate(-90, expand=True)
     draw = ImageDraw.Draw(image)
-    draw.text((800, 1220), a, font=load_font(110), fill=(255,255,0))
+    pad = math.floor((25 - len(a))/2)
+    draw.text((800, 1235), " "*pad + a, font=load_font(110), fill=(255,255,0))
     image = image.rotate(90, expand=True)
     image.save("is.png")
     image_crop = image.crop((0, 0, 1414, 1433))
