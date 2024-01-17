@@ -15,7 +15,7 @@ async def hello():
 
 @app.get("/sticker")
 async def create_sticker(u: str, b: str, m: str, y:str, a: str, c: str, n: str, e1: str, e2: str, e3: str, e4: str):
-    image = Image.open("i.png")
+    image = Image.open("i2.png")
     q = make_q(u)
     response = requests.get(q)
     qr = Image.open(io.BytesIO(response.content))
