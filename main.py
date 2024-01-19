@@ -15,7 +15,18 @@ async def hello():
 
 @app.get("/id")
 async def id(t: str):
-    return {"id": t.split('(')[1].split(')')[0]}
+    response = requests.post(
+      url = "https://evolution-api-production-c182.up.railway.app/chat/findMessages/iSell", 
+      headers = {'apikey': 'pBok98nT4h1fz5asRNoPbWh0xdRApB2G', 'Content-Type': 'application/json'}
+    )
+    res = response.json()[0]
+    nm = res['pushName']
+    nb = res['key']['remoteJid'].split('@')[0]
+    c_id = res['message']['extendedTextMessage']['text'].split('(')
+    if len(c_id) != 2:
+        c_id = "NA"
+    c_id = c_id[1].split(')')[0]
+    return {"c_id": c_id, "nm": nm, "nb": nb}
 
 @app.get("/sticker")
 async def create_sticker(u: str, b: str, m: str, y:str, a: str, c: str, n: str, e1: str, e2: str, e3: str, e4: str):
