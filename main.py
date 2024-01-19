@@ -13,6 +13,10 @@ app = FastAPI()
 async def hello():
   return {"Welcome": "It is online!"}
 
+@app.get("/id")
+async def id(t: str):
+    return {"id": t.split('(')[1].split(')')[0]}
+
 @app.get("/sticker")
 async def create_sticker(u: str, b: str, m: str, y:str, a: str, c: str, n: str, e1: str, e2: str, e3: str, e4: str):
     image = Image.open("i2.png")
