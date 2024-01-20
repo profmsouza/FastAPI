@@ -7,6 +7,10 @@ import io
 import os
 from add import make_q, load_font
 
+import pandas as pd
+import json
+import re
+
 app = FastAPI()
 
 @app.get("/")
@@ -14,19 +18,32 @@ async def hello():
   return {"Welcome": "It is online!"}
 
 @app.get("/id")
-async def id(t: str):
-    response = requests.post(
-      url = "https://evolution-api-production-c182.up.railway.app/chat/findMessages/iSell", 
-      headers = {'apikey': 'pBok98nT4h1fz5asRNoPbWh0xdRApB2G', 'Content-Type': 'application/json'}
-    )
-    res = response.json()[0]
-    nm = res['pushName']
-    nb = res['key']['remoteJid'].split('@')[0]
-    c_id = res['message']['extendedTextMessage']['text'].split('(')
-    if len(c_id) != 2:
-        c_id = "NA"
-    c_id = c_id[1].split(')')[0]
-    return {"c_id": c_id, "nm": nm, "nb": nb}
+async def id(rJid: str):
+    url = "https://evolution-api-production-c182.up.railway.app/chat/findMessages/iSell"
+    headers = {
+        'apikey': 'pBok98nT4h1fz5asRNoPbWh0xdRApB2G',
+        'Content-Type': 'application/json'
+    }
+    response = requests.post(url, headers=headers)
+    df = pd.json_normalize(response.json())
+    df = df.dropna(subset=['messageTimestamp'])
+    df = df.dropna(subset=['message.extendedTextMessage.text'])
+    df_filtrado = df[df['key.remoteJid'] == rJid]
+    df_filtrado['messageTimestamp'] = pd.to_datetime(df_filtrado['messageTimestamp'], unit='s')
+    df_filtrado = df_filtrado.sort_values(by='messageTimestamp', ascending=False)
+    c_id = "NA"
+    if len(df_filtrado) > 0:
+      mensagens = df_filtrado['message.extendedTextMessage.text'].to_numpy()
+      index = 0
+      while index < len(mensagens):
+          mensagem = mensagens[index]
+          if "ID:" in mensagem:
+              match = re.search(r'ID:(.*?)\)', mensagem)
+              if match:
+                  c_id = match.group(1)
+              break
+          index += 1
+    return {"c_id": c_id}
 
 @app.get("/sticker")
 async def create_sticker(u: str, b: str, m: str, y:str, a: str, c: str, n: str, e1: str, e2: str, e3: str, e4: str):
