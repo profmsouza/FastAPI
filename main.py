@@ -6,7 +6,6 @@ import requests
 import io
 import os
 from add import make_q, load_font
-
 import pandas as pd
 import json
 import re
